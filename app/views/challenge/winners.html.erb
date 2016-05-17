@@ -1,0 +1,71 @@
+<h3> The Winners</h3>
+<div id="share">
+Let's share your winning
+</div>
+<%= render 'social' %>
+<div class="next">
+<%= link_to "http://puzzles-engineer.github.io/" do %>
+  <h3>More puzzles? Check this out!</h3>
+<% end %>
+</div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5621408891146926"
+     data-ad-slot="9087981494"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<%= page_entries_info @users %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col-md-1">
+        No.
+      </th>
+      <th class="col-md-2">
+        Date
+      </th>
+      <th class="col-md-2">
+        Name
+      </th>
+      <th class="col-md-7">
+        Comment
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.seq %>
+        </td>
+        <td>
+          <%= user.updated_at.strftime("%d-%b-%Y") %>
+        </td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.comment %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @users %>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5621408891146926"
+     data-ad-slot="9087981494"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

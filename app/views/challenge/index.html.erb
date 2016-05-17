@@ -1,0 +1,62 @@
+<h2> Please call my APIs.</h2>
+<h3 id="call"> call<font color="#666666">/</font>me </h3>
+<div id="curl">
+  <%= image_tag 'curl.gif' %>
+</div>
+<p> clue: RESTful</p>
+<p>
+<% if @users.present? %>
+  <hr>
+  <h3 id="winner"> The Winners ( <%= @count %> )</h3>
+  <div id="winner_list">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-1">
+          No.
+        </th>
+        <th class="col-md-2">
+          Date
+        </th>
+        <th class="col-md-2">
+          Name
+        </th>
+        <th class="col-md-7">
+          Comment
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.seq %>
+          </td>
+          <td>
+            <%= user.updated_at.strftime("%d-%b-%Y") %>
+          </td>
+          <td>
+            <%= user.name %>
+          </td>
+          <td>
+            <%= user.comment %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h2 id="all_winner"> <%= link_to "All winners ( #{@count} )", { action: :winners } %></h2>
+  </div>
+<% end %>
+<p>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5621408891146926"
+     data-ad-slot="9087981494"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

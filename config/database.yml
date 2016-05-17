@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: root
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: challenge_dev
+
+test:
+  <<: *default
+  database: challenge_test
+
+production:
+  <<: *default
+  database: challenge_production

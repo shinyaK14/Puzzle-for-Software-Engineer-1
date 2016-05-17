@@ -1,0 +1,8 @@
+= simple_form_for @user, :url => challenge_users_path, :html => { :class => "form-horizontal" } do |f|
+  = f.hidden_field :token, value: @user.token
+  = f.input :name
+  = error_span(@user[:name])
+  = f.input :comment
+  = error_span(@user[:comment])
+  = recaptcha_tags
+  = f.button :submit, "OK", :class => 'btn-default'
