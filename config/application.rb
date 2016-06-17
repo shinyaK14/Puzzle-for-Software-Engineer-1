@@ -1,14 +1,15 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require "rails"
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Challenge
   class Application < Rails::Application
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
     config.generators do |g|
+      g.orm :mongoid
       g.javascripts false
       g.stylesheets false
       g.helper false
@@ -22,7 +23,7 @@ module Challenge
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
-    config.active_record.raise_in_transactional_callbacks = true
+    # config.active_record.raise_in_transactional_callbacks = true
 
     require 'http_method_not_allowed'
     config.middleware.insert_before(0, HttpMethodNotAllowed)

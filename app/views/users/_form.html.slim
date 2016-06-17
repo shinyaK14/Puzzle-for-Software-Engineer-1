@@ -1,8 +1,19 @@
-= simple_form_for @user, :url => challenge_users_path, :html => { :class => "form-horizontal" } do |f|
-  = f.hidden_field :token, value: @user.token
-  = f.input :name
-  = error_span(@user[:name])
-  = f.input :comment
-  = error_span(@user[:comment])
-  = recaptcha_tags
-  = f.button :submit, "OK", :class => 'btn-default'
+.form-horizontal role="form"
+  = form_for(@user, url: challenge_users_path) do |f|
+    = f.hidden_field :token, value: @user.token
+    .form-group
+      - unless @user.errors.empty?
+        ul class="error_messages"
+          - @user.errors.full_messages.each do |message|
+            li
+              = message
+    .form-group
+      = f.label :name
+      = f.text_field :name, :class => "form-control"
+    .form-group
+      = f.label :comment
+      = f.text_area :comment, :class => "form-control"
+    .form-group
+      = recaptcha_tags
+    .form-group
+      = f.submit "Submit", :class => "btn btn-success"

@@ -1,4 +1,12 @@
-class User < ActiveRecord::Base
+class User
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  field :email, type: String
+  field :name, type: String
+  field :token, type: String
+  field :comment, type: String
+  field :seq, type: Integer
+
   validates :name, presence: true
   validates :name, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true
@@ -10,10 +18,16 @@ class User < ActiveRecord::Base
   before_update :replace_irrelevant_comment
   before_update :set_seq
 
+  def self.clean_up_seq
+    User.order('created_at ASC').each_with_index do |u, i|
+      u.update(seq: i+1)
+    end
+  end
+
   private
 
   def create_token
-    self.token = SecureRandom.urlsafe_base64(20).html_safe
+    self.token = SecureRandom.urlsafe_base64(8).html_safe
   end
 
   def replace_irrelevant_comment
@@ -22,6 +36,6 @@ class User < ActiveRecord::Base
   end
 
   def set_seq
-    self.seq = User.where.not(comment: nil).count + 1
+    self.seq = User.where(:comment.nin => ["", nil]).count + 1
   end
 end
