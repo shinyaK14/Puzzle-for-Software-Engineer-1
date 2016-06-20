@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :controller do
       3.times { create :user, comment: 'aaa' }
       patch :update, user: { token: user.token, comment: 'abc' }
       expect(response.status).to eq(302)
-      expect(assigns[:user].seq).to eq(User.where.not(comment: nil).count)
+      expect(assigns[:user].seq).to eq(User.where(:comment.nin => ["", nil]).count)
       expect(subject).to redirect_to(winners_path)
     end
 
