@@ -11,6 +11,7 @@ services:
   - mongodb
 
 before_script:
+  - cp config/secrets.travis.yml config/secrets.yml
   - sleep 10
   - mongo mydb_test --eval 'db.addUser("travis", "test");'
 
