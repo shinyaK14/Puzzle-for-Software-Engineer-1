@@ -5,7 +5,6 @@ class User
   field :name, type: String
   field :token, type: String
   field :comment, type: String
-  field :seq, type: Integer
 
   validates :name, presence: true
   validates :name, length: { maximum: 20 }
@@ -16,13 +15,6 @@ class User
 
   before_save :create_token
   before_update :replace_irrelevant_comment
-  before_update :set_seq
-
-  def self.clean_up_seq
-    User.order('created_at ASC').each_with_index do |u, i|
-      u.update(seq: i+1)
-    end
-  end
 
   private
 
@@ -33,9 +25,5 @@ class User
   def replace_irrelevant_comment
     self.comment = comment.gsub(/call\/me/, '...')
     self.comment = comment.gsub(/challenge_users/, '...')
-  end
-
-  def set_seq
-    self.seq = User.where(:comment.nin => ["", nil]).count + 1
   end
 end

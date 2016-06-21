@@ -27,10 +27,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each do |user| %>
+      <% @users.each_with_index do |user, i| %>
         <tr>
           <td>
-            <%= user.seq %>
+            <%= @count-i %>
           </td>
           <td>
             <%= user.created_at.strftime("%d-%b-%Y") %>

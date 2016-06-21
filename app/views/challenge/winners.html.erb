@@ -39,10 +39,10 @@ Let's share your winning
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.each_with_index do |user, i| %>
       <tr>
         <td>
-          <%= user.seq %>
+          <%= @users.count - (i + @page*25) %>
         </td>
         <td>
           <%= user.created_at.strftime("%d-%b-%Y") %>

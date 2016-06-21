@@ -19,11 +19,4 @@ RSpec.describe User, type: :model do
     user.save
     expect(user.comment).not_to include('challenge_users')
   end
-
-  it 'sets seq as number of commented user when update' do
-    4.times { create :user, comment: 'abc' }
-    user.update(comment: 'abc')
-    user.reload
-    expect(user.seq).to eq(5)
-  end
 end
